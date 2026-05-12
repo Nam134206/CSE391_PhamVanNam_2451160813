@@ -9,4 +9,4 @@ sticky	    có	                            viewport(khi dính)	              có
 
 
 Câu A2:
-dg
+
