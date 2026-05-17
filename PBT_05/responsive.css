@@ -1,0 +1,130 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-size: 14px;
+    background: #f4f4f4;
+}
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+#menu{
+    display: none;
+}
+.hamburger{
+    font-size:24px;
+    cursor:pointer;
+}
+.nav{
+    background:white;
+    color:blueviolet;
+    display:none;
+    position:absolute;
+    top:70px;
+    right:10px;
+    overflow: hidden;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.nav a{
+    text-decoration:none;
+}
+#menu:checked ~ .nav{
+    display:flex;
+}
+.sidebar{
+    display:none;
+}
+.ads{
+    display:none;
+}
+.products{
+    display:grid;
+    grid-template-columns:1fr;
+    padding:15px;
+    gap:15px;
+}
+.card{
+    padding:15px;
+    border-radius:20%;
+    text-align:center;
+}
+.card img{
+    max-width:100%;
+    height:auto;
+}
+.card button{
+    cursor:pointer;
+
+}
+.footer{
+    text-align:center;
+    margin-top:20px;
+}
+@media (min-width:768px){
+    #menu{
+        display:none;
+    }
+    body{
+        font-size:16px;
+    }
+    .nav{
+        display:flex;
+        gap:20px;
+        position: static;
+        background:none;
+        flex-direction:row;
+        box-shadow:none;
+    }
+    .hamburger{
+        display:none;
+    }
+    .sidebar{
+        display:flex;
+        align-items:center;
+    }
+    .ads{
+        display:none;
+    }
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .card h3{
+        font-size:20px;
+    }
+}
+@media(min-width:1024px){
+    #menu{
+        display:none;
+    }
+    body{
+        font-size:18px;
+    }
+    .container{
+        display:grid;
+        grid-template-columns:200px 1fr 200px;
+        gap:20px;
+    }
+    .sidebar{
+        flex-direction:column;
+        align-items:flex-start;
+        height:fit-content;
+    }
+    .products{
+        grid-template-columns:repeat(4,1fr);
+    }
+    .ads{
+        display:block;
+        height:fit-content;
+        border-radius:10px;
+    }
+    .card h3{
+        font-size:22px;
+    }
+}
