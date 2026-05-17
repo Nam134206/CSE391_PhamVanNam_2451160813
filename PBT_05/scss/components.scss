@@ -1,0 +1,137 @@
+@use "./variables";
+@use "./mixins";
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 14px;
+    background: variables.$background-color;
+
+    @include mixins.respond-to(tablet){
+        font-size: 16px;
+    }
+
+    @include mixins.respond-to(desktop){
+        font-size: 18px;
+    }
+}
+
+.header{
+    @include mixins.flex-center;
+
+    .logo{
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .hamburger{
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .nav{
+        background: variables.$primary-color;
+        color: variables.$text-color;
+
+        display: none;
+        position: absolute;
+        top: 70px;
+        right: 10px;
+
+        flex-direction: column;
+
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+        a{
+            text-decoration: none;
+            padding: variables.$spacing-sm;
+        }
+    }
+}
+
+#menu{
+    display: none;
+
+    &:checked ~ .nav{
+        display: flex;
+    }
+}
+
+.sidebar,
+.ads{
+    display: none;
+}
+
+.products{
+    @include mixins.grid(1fr, variables.$spacing-md);
+
+    padding: variables.$spacing-md;
+
+    @include mixins.respond-to(tablet){
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    @include mixins.respond-to(desktop){
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+.card{
+    padding: variables.$spacing-md;
+    border-radius: 20%;
+    text-align: center;
+
+    img{
+        max-width: 100%;
+        height: auto;
+    }
+
+    button{
+        cursor: pointer;
+    }
+
+    h3{
+        @include mixins.respond-to(tablet){
+            font-size: 20px;
+        }
+
+        @include mixins.respond-to(desktop){
+            font-size: 22px;
+        }
+    }
+}
+
+.footer{
+    text-align: center;
+    margin-top: variables.$spacing-lg;
+}
+
+.container{
+    @include mixins.respond-to(desktop){
+        display: grid;
+        grid-template-columns: 200px 1fr 200px;
+        gap: variables.$spacing-lg;
+    }
+}
+
+.sidebar{
+    @include mixins.respond-to(tablet){
+        display: flex;
+        align-items: center;
+    }
+
+    @include mixins.respond-to(desktop){
+        flex-direction: column;
+        align-items: flex-start;
+        height: fit-content;
+    }
+}
+
+.ads{
+    @include mixins.respond-to(desktop){
+        display: block;
+        border-radius: variables.$border-radius;
+        height: fit-content;
+    }
+}

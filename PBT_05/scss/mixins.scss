@@ -1,0 +1,27 @@
+@use "./variables" as *;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin grid($cols, $gap){
+    display: grid;
+    grid-template-columns: $cols;
+    gap: $gap;
+}
+
+@mixin respond-to($bp){
+    @if $bp == tablet {
+        @media (min-width: $breakpoint-tablet){
+            @content;
+        }
+    }
+
+    @if $bp == desktop {
+        @media (min-width: $breakpoint-desktop){
+            @content;
+        }
+    }
+}
