@@ -198,3 +198,6 @@ Grid ảnh:
 grid-template-columns: repeat(3, 1fr);
 hoặc
 repeat(4, 1fr);
+Phần B:
+Câu B3:
+ Lệnh Conpile: sass PBT_05\scss\style.scss PBT_05\scss\style.css
