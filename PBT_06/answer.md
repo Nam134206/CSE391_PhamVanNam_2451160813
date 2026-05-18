@@ -97,3 +97,13 @@ Bước 4: Link file CSS vào HTML
 + tạo hover colors
 + tạo components đồng bộ
 - Override CSS thủ công sẽ phá tính nhất quán đó
+Câu C2:
+Tiêu chí	            CSS thuần	                Bootstrap
+CSS cần viết	        ~60-100 dòng	            Gần như 0
+Thời gian phát triển	Chậm hơn	                 Rất nhanh
+Responsive	            Tự viết media query	        Có sẵn
+Navbar collapse	        Tự code JS/CSS	            Có sẵn
+Card styles	            Tự thiết kế	                Có sẵn
+Tùy biến	            Rất cao	                    Bị giới hạn framework
+Bundle size	            Nhẹ	                        Nặng hơn
+Tính đồng bộ UI	        Tự quản lý	                Đồng bộ sẵn
