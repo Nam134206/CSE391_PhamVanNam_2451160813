@@ -21,16 +21,11 @@
                     <th>Lớp</th>
                     <th>Điểm</th>
                     <th>Email</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody id="studentList">
-                <tr>
-                    <td>12345</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>66HTTT2</td>
-                    <td>8.5</td>
-                    <td>mini@gmail.com</td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
@@ -43,10 +38,13 @@
                 <input type="text" id="studentClass" placeholder="Lớp">
                 <input type="number" id="score" placeholder="Điểm" step="0.1" min="0" max="10">
                 <input type="email" id="email" placeholder="Email">
-                <button type="submit">Lưu</button>
-                <button type="button" id="closeFormBtn">Hủy</button>
+                <div class="form-button">
+                <button class="save-btn" type="submit">Lưu</button>
+                <button class="cancel-btn" type="button" id="closeFormBtn">Hủy</button>
+                </div>
             </form>
         </div>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>
