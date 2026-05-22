@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sinh viên</title>
+</head>
+<body>
+    <div class ="container">
+        <h1>Quản lý sinh viên</h1>
+        <button id="openFormBtn">Thêm</button>
+        <div class="stats">
+            <p>Tổng số sinh viên: <span id="totalStudents">0</span></p>
+            <p>Điểm trung bình: <span id="avgScore">0</span></p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã SV</th>
+                    <th>Họ tên</th>
+                    <th>Lớp</th>
+                    <th>Điểm</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+                <tr>
+                    <td>12345</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>66HTTT2</td>
+                    <td>8.5</td>
+                    <td>mini@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <h2 id="formTitle">Thêm sinh viên</h2>
+            <form id="studentForm">
+                <input type="text" id="studentId" placeholder="Mã sinh viên">
+                <input type="text" id="studentName" placeholder="Họ và tên">
+                <input type="text" id="studentClass" placeholder="Lớp">
+                <input type="number" id="score" placeholder="Điểm" step="0.1" min="0" max="10">
+                <input type="email" id="email" placeholder="Email">
+                <button type="submit">Lưu</button>
+                <button type="button" id="closeFormBtn">Hủy</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
