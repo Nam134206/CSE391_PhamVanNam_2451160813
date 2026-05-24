@@ -78,3 +78,56 @@ const html = `
     <span>Giá: ${price}đ</span>
 </div>
 `;
+Phần C:
+Câu C1:
+- Lỗi 1 thiếu ;
+JavaScript có ASI (Automatic Semicolon Insertion) nhưng nên luôn viết ; rõ ràng để tránh bug
+Cách sửa: return "Phần trăm giảm không hợp lệ";
+- Lỗi 2 dùng var
+Vì:
+hoisting
+function scope
+dễ bug
+Cách sửa: const giamGia = giaBan * phanTramGiam / 100;
+- Lỗi 3 So sánh sai (= thay vì ===)
+= là:
+assignment
+không phải so sánh.
+Nó đang:
+gán giaSauGiam = 0
+=> điều kiện luôn falsy
+Cách sửa: if (giaSauGiam === 0)
+- Lỗi 4 Input là string "100000"
+"100000" là:
+string
+không phải number.
+JavaScript sẽ:
+type coercion
+=> vẫn tính được nhưng nguy hiểm
+Cách sửa: tinhGiaGiamGia(100000, 20)
+- Lỗi 5 Không validate kiểu dữ liệu
+Function chưa kiểm tra:
+typeof
+Có thể gây bug:
+tinhGiaGiamGia("abc", 20)
+=> NaN
+Cách sửa:
+if (
+    typeof giaBan !== "number" ||
+    typeof phanTramGiam !== "number" ||
+    Number.isNaN(giaBan) ||
+    Number.isNaN(phanTramGiam)
+) {
+    return "Input không hợp lệ";
+}
+- Lỗi 6 — Dùng var trong vòng lặp + setTimeout
+Vì:
+var = function scope
+setTimeout chạy SAU khi loop kết thúc.
+Lúc đó:
+i = 5
+nên tất cả callback đều dùng cùng 1 biến i
+Cách sửa: for (let i = 0; i < 5; i++)
+Vì let = block scope
+Mỗi vòng lặp có:
+1 biến i riêng
