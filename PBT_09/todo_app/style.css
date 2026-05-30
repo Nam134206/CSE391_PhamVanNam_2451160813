@@ -1,0 +1,120 @@
+
+    body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f5f7fb;
+        max-width: 520px;
+        margin: 50px auto;
+        padding: 20px;
+        color: #333;
+    }
+
+    /* CARD CONTAINER FEEL */
+    form, #todoList, #clearCompleted {
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        margin-bottom: 12px;
+    }
+
+    /* INPUT */
+    #todoInput {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    #todoInput:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+    }
+
+    /* FILTER BUTTONS */
+    .filter-btn {
+        background: #e5e7eb;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .filter-btn:hover {
+        background: #d1d5db;
+    }
+
+    /* LIST ITEM */
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        transition: 0.2s;
+    }
+
+    li:hover {
+        background: #f9fafb;
+    }
+
+    /* TODO TEXT */
+    .todo-text {
+        flex: 1;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    /* COMPLETED */
+    .completed {
+        text-decoration: line-through;
+        opacity: 0.5;
+    }
+
+    /* DELETE BUTTON */
+    .delete-btn {
+        background: #ef4444;
+        border: none;
+        color: white;
+        padding: 5px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .delete-btn:hover {
+        background: #dc2626;
+        transform: scale(1.05);
+    }
+
+    /* COUNT TEXT */
+    #count {
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    /* CLEAR BUTTON */
+    #clearCompleted {
+        width: 100%;
+        background: #111827;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    #clearCompleted:hover {
+        background: #000;
+    }
+
+    /* INPUT EDIT MODE */
+    .edit-input {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
