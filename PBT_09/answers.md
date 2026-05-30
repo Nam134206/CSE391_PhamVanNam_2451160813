@@ -33,4 +33,43 @@ document
 - Chọn link đang active: const activeLink = document.querySelector("a.active");
 - Chọn <li> đầu tiên trong #todoList: const firstItem = document.querySelector("#todoList li");
 - Chọn tất cả <a> bên trong <nav>: const links = document.querySelectorAll("nav a");
-
+Câu A2:
+- Sự khác nhau:
++ TextContent:
+Chỉ lấy / gán text thuần
+Không hiểu HTML
+An toàn với user input (KHÔNG chạy script)
+element.textContent = "<b>Hello</b>";
+=> Kết quả hiển thị:
+<b>Hello</b> (dạng text, không in đậm)
++ innerHTML:
+Lấy / gán HTML + text
+Browser sẽ parse HTML
+Có thể tạo element thật trong DOM
+element.innerHTML = "<b>Hello</b>";
+=> Kết quả:
+Hello (in đậm thật)
+- Khi nào dùng:
++ textContent:
+Hiển thị dữ liệu user nhập
+Comment, todo text, search result
+Không cần HTML
+VD:
+span.textContent = todo.text;
++ innerHTML:
+Render UI từ template string
+Render list HTML (todo, card, table)
+Dữ liệu đã được kiểm soát (trusted)
+VD:
+list.innerHTML = todos.map(t => `
+  <li>${t.text}</li>
+`).join("");
+- Vì sao innerHTML gây XSS:
++ Khi user inject JavaScript vào website
++ Browser sẽ:
+Parse <img>
+Gặp onerror
+Chạy JavaScript alert('Hacked!')
+=> WEBSITE BỊ CHẠY CODE CỦA USER
+VD: const userInput = document.querySelector("#search").value;
+document.querySelector("#result").textContent = userInput;
