@@ -2,13 +2,12 @@
 console.log(x);
 var x = 5;
 
-// Đoạn 2
-console.log(y);
+// Đoạn 2           
 let y = 10;
+console.log(y);
 
 // Đoạn 3
 const z = 15;
-z = 20;
 console.log(z);
 
 // Đoạn 4
