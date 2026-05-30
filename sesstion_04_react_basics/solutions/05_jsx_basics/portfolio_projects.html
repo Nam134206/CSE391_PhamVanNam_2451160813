@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <h1>🛠️ Dự án của Minh</h1>
+    <h1>🛠️ Dự án Nam</h1>
     <div id="root"></div>
 
     <script type="text/babel">
@@ -87,14 +87,14 @@
         // - Nếu featured === true: hiển thị badge "⭐ Nổi bật" ở góc phải
         // - Dùng conditional rendering cho featured badge
         // ============================================
-        function ProjectCard({ title, category, image, description, tags, featured }) {
-            title,
+       function ProjectCard({
+    title,
     category,
     image,
     description,
     tags,
     featured
-} {
+}) {
     return (
         <div className="project-card">
 
@@ -128,9 +128,10 @@
                 </div>
 
             </div>
+
         </div>
     );
-        }
+}
 
         // ============================================
         // TODO 3: Component ProjectList
