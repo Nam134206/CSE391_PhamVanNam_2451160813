@@ -130,3 +130,24 @@ count = localStorage.getItem("count");
 8. Lỗi deleteHistory dùng parentNode.removeChild (cũ)
 element.parentNode.removeChild(element);
 => element.remove();
+Câu C2:
+1. Giải thích: Tại sao bind event lên 1000 elements riêng lẻ là BAD PRACTICE? Event Delegation giải quyết thế nào?
+- Vấn đề 1: Tốn memory (RAM)
+button.addEventListener("click", handler);
+=> Nếu có 1000 elements:
+1000 event listeners riêng biệt
+Mỗi listener = 1 closure + context
+=> Memory tăng mạnh
+- Vấn đề 2: Chậm khi render + maintain
+Khó quản lý (remove/add/update)
+Render lại list → mất event → phải gắn lại
+- Vấn đề 3: Không scale tốt
+1000 → 10.000 elements = crash performanc
+- Event Delegation giải quyết thế nào?
+KHÔNG gắn event cho từng item
+Gắn 1 event cho CHA
+2. Refactor dùng DocumentFragment để chỉ gây 1 lần reflow. Giải thích tại sao nhanh hơn.
+- Cách hoạt động của DocumentFragment
+Là “DOM giả” nằm trong memory (off-screen)
+KHÔNG render lên browser khi append từng node
+Browser không tính layout khi thêm vào fragment
