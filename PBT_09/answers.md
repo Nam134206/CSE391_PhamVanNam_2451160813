@@ -42,6 +42,7 @@ An toàn với user input (KHÔNG chạy script)
 element.textContent = "<b>Hello</b>";
 => Kết quả hiển thị:
 <b>Hello</b> (dạng text, không in đậm)
+
 + innerHTML:
 Lấy / gán HTML + text
 Browser sẽ parse HTML
@@ -49,6 +50,7 @@ Có thể tạo element thật trong DOM
 element.innerHTML = "<b>Hello</b>";
 => Kết quả:
 Hello (in đậm thật)
+
 - Khi nào dùng:
 + textContent:
 Hiển thị dữ liệu user nhập
@@ -56,6 +58,7 @@ Comment, todo text, search result
 Không cần HTML
 VD:
 span.textContent = todo.text;
+
 + innerHTML:
 Render UI từ template string
 Render list HTML (todo, card, table)
@@ -64,6 +67,7 @@ VD:
 list.innerHTML = todos.map(t => `
   <li>${t.text}</li>
 `).join("");
+
 - Vì sao innerHTML gây XSS:
 + Khi user inject JavaScript vào website
 + Browser sẽ:
@@ -74,6 +78,7 @@ Chạy JavaScript alert('Hacked!')
 VD: const userInput = document.querySelector("#search").value;
 document.querySelector("#result").textContent = userInput;
 Câu A3:
+
 - Khi click vào button:
 => Event không dừng ở button
 => Nó (bubble) lên cha → ông → document
@@ -88,6 +93,7 @@ Thứ tự chạy:
 BUTTON
 INNER
 OUTER
+
 - Khi bật e.stopPropagation()
 document.querySelector("#btn").addEventListener("click", (e) => {
     console.log("BUTTON");
@@ -95,3 +101,32 @@ document.querySelector("#btn").addEventListener("click", (e) => {
 });
  Thứ tự chạy:
 BUTTON
+Phần C:
+Câu C1:
+
+1. Lỗi dùng innerHTML để hiển thị số
+countDisplay.innerHTML = count;
+=> countDisplay.textContent = count;
+
+2. Lỗi sai event name
+document.querySelector("#decrementBtn").addEventListener("onclick", function() {
+=> document.querySelector("#decrementBtn").addEventListener("click", function() {
+
+3. Lỗi sai update DOM (gán nhầm biến)
+countDisplay = count;
+=> countDisplay.textContent = count;
+4. Lỗi historyList.innerHTML = null
+historyList.innerHTML = null;
+=> historyList.innerHTML = "";
+5. Lỗi remove không gọi hàm
+item.remove;
+=> item.remove();
+6. Lỗi beforeunload lưu innerHTML dễ sai format + XSS risk
+const countDisplay = document.querySelector(".count");
+=> const countDisplay = document.querySelector(".count")
+7. Lỗi localStorage getItem trả string → không ép kiểu
+count = localStorage.getItem("count");
+=> count = Number(localStorage.getItem("count"));
+8. Lỗi deleteHistory dùng parentNode.removeChild (cũ)
+element.parentNode.removeChild(element);
+=> element.remove();
