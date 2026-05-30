@@ -73,3 +73,25 @@ Chạy JavaScript alert('Hacked!')
 => WEBSITE BỊ CHẠY CODE CỦA USER
 VD: const userInput = document.querySelector("#search").value;
 document.querySelector("#result").textContent = userInput;
+Câu A3:
+- Khi click vào button:
+=> Event không dừng ở button
+=> Nó (bubble) lên cha → ông → document
+Thứ tự DOM:
+BUTTON → INNER → OUTER
+= Không dùng stopPropagation()
+Code:
+outer → console.log("OUTER")
+inner → console.log("INNER")
+button → console.log("BUTTON")
+Thứ tự chạy:
+BUTTON
+INNER
+OUTER
+- Khi bật e.stopPropagation()
+document.querySelector("#btn").addEventListener("click", (e) => {
+    console.log("BUTTON");
+    e.stopPropagation();
+});
+ Thứ tự chạy:
+BUTTON
