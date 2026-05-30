@@ -24,6 +24,7 @@ function Portfolio() {
         />
     ))}
 </div>
+
                 <div className="portfolio-grid">
                     {items.map(project => (
                         <ProjectCard
@@ -69,6 +70,7 @@ function Portfolio() {
                     {categories.map(category => (
                         <button
                             key={category}
+
                            className={`filter-btn ${filter === category ? 'active' : ''}`}
                             
                            onClick={() => setFilter(category)}
