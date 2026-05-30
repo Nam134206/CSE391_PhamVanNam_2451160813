@@ -54,6 +54,7 @@ function Portfolio() {
     const categories = ['all', 'web', 'mobile', 'design'];
 
     // Filter logic
+    
     const filteredItems = filter === 'all'
         ? items
         : items.filter(item => item.category === filter);
@@ -76,7 +77,6 @@ function Portfolio() {
                         </button>
                     ))}
                 </div>
-
                 {/* Render filtered items */}
                 <div className="portfolio-grid">
                     {filteredItems.map(project => (
