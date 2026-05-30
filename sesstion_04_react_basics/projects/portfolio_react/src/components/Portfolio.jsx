@@ -12,7 +12,18 @@ function Portfolio() {
             <div className="container">
                 <h2 className="text-center mb-5">My Portfolio</h2>
 
-                {/* Render list from state */}
+                <div className="portfolio-grid">
+    {items.map((project) => (
+        <ProjectCard
+            key={project.id}
+            title={project.title}
+            category={project.category}
+            image={project.image}
+            description={project.description}
+            tags={project.tags}
+        />
+    ))}
+</div>
                 <div className="portfolio-grid">
                     {items.map(project => (
                         <ProjectCard
