@@ -118,3 +118,70 @@ async function loadReviews() {
         console.error(error);
     }
 }
+Phần C:
+Câu C1:
+1. Network errors (mất mạng giữa chừng) → Xử lý thế nào?
+try {
+    const response = await fetch("/api/products");
+    const data = await response.json();
+} catch (error) {
+    showError("Không có kết nối mạng. Vui lòng thử lại!");
+    console.error(error);
+}
+2. API errors (server trả 500, 404, 429 Too Many Requests) → Xử lý từng loại
+404 Not Found
+if (response.status === 404) {
+    throw new Error("Sản phẩm không tồn tại");
+}
+Giải thích: URL hoặc dữ liệu không tồn tại.
+500 Internal Server Error
+if (response.status === 500) {
+    throw new Error("Lỗi server, vui lòng thử lại sau");
+}
+Giải thích: Lỗi phía server.
+429 Too Many Requests
+if (response.status === 429) {
+    throw new Error("Quá nhiều yêu cầu, vui lòng chờ");
+}
+Giải thích: Người dùng gửi quá nhiều request trong thời gian ngắn.
+Pattern chung
+if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+}
+3. Timeout (API chậm > 10 giây) → Viết code fetchWithTimeout(url, ms)
+Code fetchWithTimeout
+async function fetchWithTimeout(url, ms = 10000) {
+    return Promise.race([
+        fetch(url),
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Request Timeout")), ms)
+        )
+    ]);
+}
+Sử dụng
+try {
+    const response = await fetchWithTimeout("/api/products", 10000);
+    const data = await response.json();
+} catch (error) {
+    console.error(error.message);
+}
+4. Retry logic (thử lại 3 lần nếu lỗi network) → Viết code fetchWithRetry(url, maxRetries)
+async function fetchWithRetry(url, maxRetries = 3) {
+    for (let i = 1; i <= maxRetries; i++) {
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            return response;
+        } catch (error) {
+            console.log(`Retry ${i}/${maxRetries}`);
+
+            if (i === maxRetries) {
+                throw error;
+            }
+        }
+    }
+}
