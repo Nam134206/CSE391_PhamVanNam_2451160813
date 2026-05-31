@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Photo Gallery</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header>
+    <h1>📸 Infinite Gallery</h1>
+    <p>Lazy Loading + Infinite Scroll + Lightbox</p>
+</header>
+
+<main>
+    <div id="gallery"></div>
+
+    <div id="loading">
+        ⏳ Đang tải thêm ảnh...
+    </div>
+
+    <div id="load-trigger"></div>
+</main>
+
+<div id="lightbox" class="hidden">
+    <span id="close-btn">&times;</span>
+
+    <img id="lightbox-img">
+
+    <p id="lightbox-title"></p>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
