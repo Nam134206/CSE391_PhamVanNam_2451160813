@@ -59,3 +59,62 @@ setTimeout(() => console.log("7 - Nested timeout"), 0);
 7 - Nested timeout
 
 5 - Timeout 100ms phải đợi đủ 100ms mới được đưa vào queue.
+Câu A2:
+1. await fetch(...) — fetch trả về gì? Tại sao cần await?
+fetch() trả về Promise
+Promise đó sẽ resolve thành một Response object
+Cần await để chờ Promise hoàn thành và lấy Response
+2. response.ok — Khi nào false? Liệt kê 3 status codes tương ứng.
+fetch() không tự throw với HTTP 4xx/5xx, phải tự kiểm tra response.ok.
+
+response.ok = true khi status từ 200–299
+response.ok = false khi status ngoài khoảng đó
+
+Ví dụ:
+
+404 Not Found     → response.ok = false
+500 Server Error  → response.ok = false
+403 Forbidden     → response.ok = false
+3. response.json() — Tại sao cần await lần nữa?
+response.json() cũng trả về Promise
+Browser cần thời gian để parse JSON thành object JavaScript
+Vì vậy phải dùng await lần nữa
+4. try...catch — Catch những lỗi gì? (Network error? 404? JSON parse error?)
+- Network Error
+- Lỗi tự throw
+- JSON parse error
+Câu A3:
+1. Sơ đồ 3 trạng thái của Promise
+          Pending
+     (Đang xử lý)
+          │
+     ┌────┴────┐
+     │         │
+     ▼         ▼
+ Fulfilled   Rejected
+(Thành công) (Thất bại)
+2. Callback Hell là gì?
+Callback Hell là tình trạng nhiều callback lồng nhau quá sâu làm code khó đọc, khó bảo trì và khó xử lý lỗi
+3. Viết ví dụ 4 cấp callback hell → Refactor thành async/await.
+getUser(function(user) {
+    getOrders(user.id, function(orders) {
+        getProduct(orders[0].productId, function(product) {
+            getReview(product.id, function(reviews) {
+                console.log(reviews);
+            });
+        });
+    });
+});
+-  Refactor thành async/await.
+async function loadReviews() {
+    try {
+        const user = await getUser();
+        const orders = await getOrders(user.id);
+        const product = await getProduct(orders[0].productId);
+        const reviews = await getReview(product.id);
+
+        console.log(reviews);
+    } catch (error) {
+        console.error(error);
+    }
+}
