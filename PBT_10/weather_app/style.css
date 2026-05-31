@@ -1,0 +1,31 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    width: 420px;
+
+    backdrop-filter: blur(20px);
+
+    background: rgba(255,255,255,.15);
+
+    border: 1px solid rgba(255,255,255,.3);
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.2);
+}
