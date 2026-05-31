@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Dashboard</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header>
+    <div>
+        <h1>🌍 Live Data Dashboard</h1>
+        <p>Users • Weather • Countries</p>
+    </div>
+
+    <button id="refreshBtn">
+        🔄 Refresh All
+    </button>
+</header>
+
+<div class="stats">
+    <div class="stat-box">
+        <span>⏱️ Fetch Time</span>
+        <h2 id="loadTime">0 ms</h2>
+    </div>
+
+    <div class="stat-box">
+        <span>📡 Status</span>
+        <h2 id="status">Loading...</h2>
+    </div>
+</div>
+
+<main class="dashboard">
+
+    <section class="widget">
+        <div class="widget-header">
+            👤 Random User
+        </div>
+        <div id="userWidget"></div>
+    </section>
+
+    <section class="widget">
+        <div class="widget-header">
+            🌦️ Weather
+        </div>
+        <div id="weatherWidget"></div>
+    </section>
+
+    <section class="widget">
+        <div class="widget-header">
+            🌎 Country
+        </div>
+        <div id="countryWidget"></div>
+    </section>
+
+</main>
+
+<script src="./app.js"></script>
+
+</body>
+</html>
