@@ -165,6 +165,7 @@ try {
 } catch (error) {
     console.error(error.message);
 }
+Giải thích: Nếu API chậm hơn 10 giây → Promise timeout thắng → throw lỗi.
 4. Retry logic (thử lại 3 lần nếu lỗi network) → Viết code fetchWithRetry(url, maxRetries)
 async function fetchWithRetry(url, maxRetries = 3) {
     for (let i = 1; i <= maxRetries; i++) {
@@ -185,3 +186,51 @@ async function fetchWithRetry(url, maxRetries = 3) {
         }
     }
 }
+Giải thích: Nếu request lỗi mạng → thử lại tối đa 3 lần. Sau lần cuối vẫn lỗi → throw ra ngoài.
+Câu C2:
+Method	                Khi nào resolve?	        Khi nào reject?	        Use case
+.all()	        Tất cả Promise thành công	Chỉ cần 1 Promise lỗi	Dashboard cần đủ toàn bộ dữ liệu
+.allSettled()	Khi tất cả Promise kết thúc	Không reject	        Hiển thị dữ liệu nào lấy được
+.race()	        Promise đầu tiên resolve	Promise đầu tiên reject	Timeout API
+.any()	        Promise đầu tiên thành công	Tất cả Promise đều lỗi	Lấy dữ liệu từ nhiều server dự phòng
+1. .all()
+async function loadDashboard() {
+    const [user, cart, notifications] = await Promise.all([
+        fetch("/api/user").then(r => r.json()),
+        fetch("/api/cart").then(r => r.json()),
+        fetch("/api/notifications").then(r => r.json())
+    ]);
+
+    renderDashboard(user, cart, notifications);
+}
+2. .allSettled()
+const results = await Promise.allSettled([
+    fetch("/api/banner").then(r => r.json()),
+    fetch("/api/products").then(r => r.json()),
+    fetch("/api/reviews").then(r => r.json())
+]);
+
+results.forEach(result => {
+    if (result.status === "fulfilled") {
+        console.log(result.value);
+    } else {
+        console.error(result.reason);
+    }
+});
+3. race()
+async function fetchWithTimeout(url) {
+    return Promise.race([
+        fetch(url),
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Timeout")), 10000)
+        )
+    ]);
+}
+4. any()
+const data = await Promise.any([
+    fetch("https://vn-api.com/products").then(r => r.json()),
+    fetch("https://sg-api.com/products").then(r => r.json()),
+    fetch("https://jp-api.com/products").then(r => r.json())
+]);
+
+console.log(data);
