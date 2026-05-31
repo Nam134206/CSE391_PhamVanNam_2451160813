@@ -1,0 +1,187 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Segoe UI,sans-serif;
+    background:
+    radial-gradient(circle at top left,#7f5af0,#16161a);
+    min-height:100vh;
+    padding:40px;
+    color:white;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+header h1{
+    font-size:3rem;
+}
+
+header p{
+    opacity:.8;
+}
+
+.toolbar{
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.toolbar input{
+    flex:1;
+}
+
+input{
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    border-radius:12px;
+    padding:14px 20px;
+    font-weight:bold;
+}
+
+#addBtn{
+    background:#00d4ff;
+}
+
+#userForm{
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:25px;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.form-actions{
+    display:flex;
+    gap:10px;
+}
+
+.form-actions button:first-child{
+    background:#00e676;
+}
+
+.form-actions button:last-child{
+    background:#ff5252;
+    color:white;
+}
+
+#userList{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    border-radius:20px;
+    padding:20px;
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    margin-bottom:8px;
+    opacity:.9;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.edit{
+    background:#ffd166;
+}
+
+.delete{
+    background:#ef476f;
+    color:white;
+}
+
+.skeleton{
+    height:180px;
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        #444 25%,
+        #666 50%,
+        #444 75%
+    );
+
+    background-size:200% 100%;
+    animation:loading 1.2s infinite;
+}
+
+@keyframes loading{
+    from{
+        background-position:200% 0;
+    }
+    to{
+        background-position:-200% 0;
+    }
+}
+
+#toast{
+    position:fixed;
+    top:20px;
+    right:20px;
+
+    padding:15px 25px;
+    border-radius:12px;
+
+    font-weight:bold;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.3s;
+}
+
+#toast.show{
+    opacity:1;
+}
+
+.success{
+    background:#06d6a0;
+}
+
+.error{
+    background:#ef476f;
+}

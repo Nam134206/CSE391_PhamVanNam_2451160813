@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>User Directory</h1>
+        <p>CRUD với JSONPlaceholder API</p>
+    </header>
+
+    <div class="toolbar">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Tìm theo tên hoặc email..."
+        >
+
+        <button id="addBtn">
+            + Add User
+        </button>
+    </div>
+
+    <form id="userForm" class="hidden">
+        <h2 id="formTitle">Add User</h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            required
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="text"
+            id="phone"
+            placeholder="Phone"
+            required
+        >
+
+        <div class="form-actions">
+            <button type="submit">
+                Save
+            </button>
+
+            <button type="button" id="cancelBtn">
+                Cancel
+            </button>
+        </div>
+    </form>
+
+    <div id="toast"></div>
+
+    <div id="userList"></div>
+
+</div>
+
+<script src="./app.js"></script>
+
+</body>
+</html>
