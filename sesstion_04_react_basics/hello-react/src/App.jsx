@@ -1,7 +1,34 @@
 import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoFilter from "./components/TodoFilter";
+import LifecycleDemo from "./LifecycleDemo";
+import BadCounter from "./BadCounter";
+import GoodCounter from "./GoodCounter";
+import FlowDemo from "./FlowDemo";
 
+import SimpleVariables from "./SimpleVariables";
+import TernaryDemo from "./TernaryDemo";
+import ListRendering from "./ListRendering";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ProductCard from "./components/ProductCard";
+import UserCard from "./components/UserCard"
+
+import NumberState from "./components/NumberState";
+import StringState from "./components/StringState";
+import BooleanState from "./components/BooleanState";
+import MultipleStates from "./components/MultipleStates";
+
+import ClickEvents from "./ClickEvents";
+import InputEvents from "./InputEvents";
+import KeyboardEvents from "./KeyboardEvents";
+import FormEvents from "./FormEvents";
+
+import ListBasics from "./ListBasics";
+import CreateItem from "./CreateItem";
+import DeleteItem from "./DeleteItem";
+import UpdateItem from "./UpdateItem";
 function App() {
     // State chính (Tier 4)
     const [todos, setTodos] = useState([]);
@@ -53,12 +80,57 @@ function App() {
     const completedCount = todos.filter(todo => todo.done).length;
     
     return (
+        
         <div style={{ 
             maxWidth: "500px", 
             margin: "0 auto", 
             padding: "20px",
             fontFamily: "Arial, sans-serif"
         }}>
+            <h1>Tier 0 - JSX Basics</h1>
+
+            <UserProfile />
+
+            <hr />
+
+            <ProductInfo />
+            <h1>Tier 1 - React Flow</h1>
+      <LifecycleDemo />
+      <BadCounter />
+      <GoodCounter />
+      <FlowDemo />
+
+      <hr />
+
+      <h1>Tier 2 - JSX Variables</h1>
+      <SimpleVariables />
+      <TernaryDemo />
+      <ListRendering />
+
+      <hr />
+
+      <h1>Tier 4 - useState</h1>
+      <NumberState />
+      <StringState />
+      <BooleanState />
+      <MultipleStates />
+
+      <hr />
+
+      <h1>Tier 5 - Events</h1>
+      <ClickEvents />
+      <InputEvents />
+      <KeyboardEvents />
+      <FormEvents />
+
+      <hr />
+
+      <h1>Tier 6 - CRUD</h1>
+      <ListBasics />
+      <CreateItem />
+      <DeleteItem />
+      <UpdateItem />
+
             <h1 style={{ textAlign: "center" }}>📋 Todo List</h1>
             
             {/* Input (Tier 5) */}
