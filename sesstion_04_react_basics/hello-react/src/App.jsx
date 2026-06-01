@@ -21,6 +21,18 @@ function App() {
             <hr />
 
             <FlowDemo />
+
+            <h1>Tier 2 - JSX Variables</h1>
+
+            <SimpleVariables />
+
+            <hr />
+
+            <TernaryDemo />
+
+            <hr />
+
+            <ListRendering />
         </div>
     );
 }
