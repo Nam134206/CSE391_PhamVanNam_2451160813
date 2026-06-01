@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function MultipleStates() {
+function MultipleState() {
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [email, setEmail] =
@@ -163,4 +163,4 @@ function MultipleStates() {
     );
 }
 
-export default MultipleStates;
+export default MultipleState;

@@ -1,10 +1,18 @@
 import { useState } from "react";
+
+// ===== COMPONENTS =====
 import TodoItem from "./components/TodoItem";
 import TodoFilter from "./components/TodoFilter";
+
 import LifecycleDemo from "./LifecycleDemo";
 import BadCounter from "./BadCounter";
 import GoodCounter from "./GoodCounter";
 import FlowDemo from "./FlowDemo";
+
+import NumberState from "./components/NumberState";
+import StringState from "./components/StringState";
+import BooleanState from "./components/BooleanState";
+import MultipleState from "./components/MultipleState";
 
 import SimpleVariables from "./SimpleVariables";
 import TernaryDemo from "./TernaryDemo";
@@ -12,13 +20,9 @@ import ListRendering from "./ListRendering";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
-import UserCard from "./components/UserCard"
 
-import NumberState from "./components/NumberState";
-import StringState from "./components/StringState";
-import BooleanState from "./components/BooleanState";
-import MultipleStates from "./components/MultipleStates";
+import ProductCard from "./components/ProductCard";
+import UserCard from "./components/UserCard";
 
 import ClickEvents from "./ClickEvents";
 import InputEvents from "./InputEvents";
@@ -27,191 +31,182 @@ import FormEvents from "./FormEvents";
 
 import ListBasics from "./ListBasics";
 import CreateItem from "./CreateItem";
-import DeleteItem from "./DeleteItem";
-import UpdateItem from "./UpdateItem";
+import DeleteItem from "./Delete";
+import UpdateItem from "./Update";
+
 function App() {
-    // State chính (Tier 4)
+    // ================= DATA =================
+    const products = [
+        { id: 1, name: "iPhone 15", price: "25.000.000", image: "https://picsum.photos/250/150?1" },
+        { id: 2, name: "Samsung S24", price: "22.000.000", image: "https://picsum.photos/250/150?2" },
+        { id: 3, name: "Xiaomi 14", price: "15.000.000", image: "https://picsum.photos/250/150?3" }
+    ];
+
+    const users = [
+        { id: 1, name: "Nguyễn Văn Minh", email: "minh@gmail.com", avatar: "https://i.pravatar.cc/100?img=1" },
+        { id: 2, name: "Trần Văn An", email: "an@gmail.com", avatar: "https://i.pravatar.cc/100?img=2" },
+        { id: 3, name: "Lê Thị Linh", email: "linh@gmail.com", avatar: "https://i.pravatar.cc/100?img=3" }
+    ];
+
+    // ================= TODO STATE =================
     const [todos, setTodos] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [filter, setFilter] = useState("all");
-    
-    // ===== Thêm todo (Tier 6) =====
+
     function addTodo() {
         if (inputValue.trim() === "") return;
-        
-        const newTodo = {
-            id: Date.now(),
-            text: inputValue,
-            done: false
-        };
-        
-        setTodos([...todos, newTodo]);
+
+        setTodos([
+            ...todos,
+            { id: Date.now(), text: inputValue, done: false }
+        ]);
+
         setInputValue("");
     }
-    
-    // Xử lý phím Enter (Tier 5)
-    function handleKeyPress(event) {
-        if (event.key === "Enter") {
-            addTodo();
-        }
+
+    function handleKeyDown(e) {
+        if (e.key === "Enter") addTodo();
     }
-    
-    // ===== Toggle done (Tier 6) =====
+
     function toggleTodo(id) {
-        setTodos(todos.map(todo =>
-            todo.id === id ? { ...todo, done: !todo.done } : todo
-        ));
+        setTodos(
+            todos.map(t =>
+                t.id === id ? { ...t, done: !t.done } : t
+            )
+        );
     }
-    
-    // ===== Xóa todo (Tier 6) =====
+
     function deleteTodo(id) {
-        setTodos(todos.filter(todo => todo.id !== id));
+        setTodos(todos.filter(t => t.id !== id));
     }
-    
-    // ===== Lọc todos (Tier 2) =====
+
     const filteredTodos = todos.filter(todo => {
         if (filter === "active") return !todo.done;
         if (filter === "completed") return todo.done;
         return true;
     });
-    
-    // ===== Đếm số việc (Tier 2) =====
-    const activeCount = todos.filter(todo => !todo.done).length;
-    const completedCount = todos.filter(todo => todo.done).length;
-    
+
+    const activeCount = todos.filter(t => !t.done).length;
+    const completedCount = todos.filter(t => t.done).length;
+
+    // ================= STYLE HELPERS =================
+    const box = {
+        border: "2px solid #ddd",
+        padding: "15px",
+        margin: "20px 0",
+        borderRadius: "8px"
+    };
+
+    const title = {
+        background: "#222",
+        color: "white",
+        padding: "10px",
+        borderRadius: "6px"
+    };
+
     return (
-        
-        <div style={{ 
-            maxWidth: "500px", 
-            margin: "0 auto", 
-            padding: "20px",
-            fontFamily: "Arial, sans-serif"
-        }}>
-            <h1>Tier 0 - JSX Basics</h1>
+        <div style={{ maxWidth: 900, margin: "0 auto", fontFamily: "Arial" }}>
 
-            <UserProfile />
+            <Header />
 
-            <hr />
+            {/* ================= TODO SECTION ================= */}
+            <div style={box}>
+                <h2 style={title}>📋 TODO APP</h2>
 
-            <ProductInfo />
-            <h1>Tier 1 - React Flow</h1>
-      <LifecycleDemo />
-      <BadCounter />
-      <GoodCounter />
-      <FlowDemo />
-
-      <hr />
-
-      <h1>Tier 2 - JSX Variables</h1>
-      <SimpleVariables />
-      <TernaryDemo />
-      <ListRendering />
-
-      <hr />
-
-      <h1>Tier 4 - useState</h1>
-      <NumberState />
-      <StringState />
-      <BooleanState />
-      <MultipleStates />
-
-      <hr />
-
-      <h1>Tier 5 - Events</h1>
-      <ClickEvents />
-      <InputEvents />
-      <KeyboardEvents />
-      <FormEvents />
-
-      <hr />
-
-      <h1>Tier 6 - CRUD</h1>
-      <ListBasics />
-      <CreateItem />
-      <DeleteItem />
-      <UpdateItem />
-
-            <h1 style={{ textAlign: "center" }}>📋 Todo List</h1>
-            
-            {/* Input (Tier 5) */}
-            <div style={{ display: "flex", marginBottom: "20px" }}>
-                <input 
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Nhập công việc..."
-                    style={{ 
-                        flex: 1, 
-                        padding: "10px", 
-                        fontSize: "16px",
-                        border: "2px solid #ddd",
-                        borderRadius: "4px 0 0 4px"
-                    }}
-                />
-                <button 
-                    onClick={addTodo}
-                    style={{ 
-                        padding: "10px 20px", 
-                        fontSize: "16px",
-                        background: "#3498db",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "0 4px 4px 0",
-                        cursor: "pointer"
-                    }}
-                >
-                    Thêm
-                </button>
-            </div>
-            
-            {/* Filter (Tier 3) */}
-            <TodoFilter 
-                filter={filter}
-                setFilter={setFilter}
-            />
-            
-            {/* Todo list (Tier 6) */}
-            {filteredTodos.length === 0 ? (
-                <div style={{ 
-                    textAlign: "center", 
-                    padding: "40px",
-                    color: "#999"
-                }}>
-                    {todos.length === 0 
-                        ? "📝 Chưa có công việc nào" 
-                        : "Không có công việc phù hợp"}
-                </div>
-            ) : (
-                filteredTodos.map(todo => (
-                    <TodoItem 
-                        key={todo.id}
-                        todo={todo}
-                        onToggle={toggleTodo}
-                        onDelete={deleteTodo}
+                <div style={{ display: "flex", marginTop: 10 }}>
+                    <input
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Nhập công việc..."
+                        style={{ flex: 1, padding: 10 }}
                     />
-                ))
-            )}
-            
-            {/* Footer (Tier 2) */}
-            {todos.length > 0 && (
-                <div style={{ 
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: "15px",
-                    padding: "10px",
-                    background: "#f9f9f9",
-                    borderRadius: "4px"
-                }}>
-                    <span>{activeCount} việc chưa hoàn thành</span>
-                    {completedCount > 0 && (
-                        <span style={{ color: "#666" }}>
-                            {completedCount} việc đã xong
-                        </span>
-                    )}
+                    <button onClick={addTodo}>Thêm</button>
                 </div>
-            )}
+
+                <TodoFilter filter={filter} setFilter={setFilter} />
+
+                {filteredTodos.length === 0 ? (
+                    <p>Không có công việc</p>
+                ) : (
+                    filteredTodos.map(todo => (
+                        <TodoItem
+                            key={todo.id}
+                            todo={todo}
+                            onToggle={toggleTodo}
+                            onDelete={deleteTodo}
+                        />
+                    ))
+                )}
+
+                {todos.length > 0 && (
+                    <p>
+                        {activeCount} chưa xong | {completedCount} đã xong
+                    </p>
+                )}
+            </div>
+
+            {/* ================= TIER 1 ================= */}
+            <div style={box}>
+                <h2 style={title}>TIER 1 - FLOW</h2>
+                <LifecycleDemo />
+                <BadCounter />
+                <GoodCounter />
+                <FlowDemo />
+            </div>
+
+            {/* ================= TIER 2 ================= */}
+            <div style={box}>
+                <h2 style={title}>TIER 2 - VARIABLES</h2>
+                <SimpleVariables />
+                <TernaryDemo />
+                <ListRendering />
+            </div>
+
+            {/* ================= PRODUCTS ================= */}
+            <div style={box}>
+                <h2 style={title}>PRODUCTS</h2>
+                {products.map(p => (
+                    <ProductCard key={p.id} {...p} />
+                ))}
+            </div>
+
+            {/* ================= USERS ================= */}
+            <div style={box}>
+                <h2 style={title}>USERS</h2>
+                {users.map(u => (
+                    <UserCard key={u.id} {...u} />
+                ))}
+            </div>
+
+            {/* ================= TIER 4 ================= */}
+            <div style={box}>
+                <h2 style={title}>TIER 4 - STATE</h2>
+                <NumberState />
+                <StringState />
+                <BooleanState />
+                <MultipleState />
+            </div>
+
+            {/* ================= TIER 5 ================= */}
+            <div style={box}>
+                <h2 style={title}>TIER 5 - EVENTS</h2>
+                <ClickEvents />
+                <InputEvents />
+                <KeyboardEvents />
+                <FormEvents />
+            </div>
+
+            {/* ================= TIER 6 ================= */}
+            <div style={box}>
+                <h2 style={title}>TIER 6 - CRUD</h2>
+                <ListBasics />
+                <CreateItem />
+                <DeleteItem />
+                <UpdateItem />
+            </div>
+
+            <Footer />
         </div>
     );
 }
