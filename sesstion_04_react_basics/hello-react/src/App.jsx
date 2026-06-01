@@ -1,25 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-import UserProfile from "./UserProfile";
-import ProductInfo from "./ProductInfo";
+import LifecycleDemo from "./LifecycleDemo";
+import BadCounter from "./BadCounter";
+import GoodCounter from "./GoodCounter";
+import FlowDemo from "./FlowDemo";
+
 function App() {
-  return (
-    <div>
-      <h1>Phạm Văn Nam</h1>
-      <p>Hôm nay là ngày đẹp trời</p>
+    return (
+        <div>
+            <h1>Tier 1 - React Flow</h1>
 
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>React</li>
-      </ul>
-    </div>
-  );
+            <LifecycleDemo />
+
+            <hr />
+
+            <BadCounter />
+
+            <hr />
+
+            <GoodCounter />
+
+            <hr />
+
+            <FlowDemo />
+        </div>
+    );
 }
-
 
 export default App;
