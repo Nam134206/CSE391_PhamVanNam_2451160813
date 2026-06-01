@@ -1,184 +1,145 @@
-import LifecycleDemo from "./LifecycleDemo";
-import BadCounter from "./BadCounter";
-import GoodCounter from "./GoodCounter";
-import FlowDemo from "./FlowDemo";
-import NumberState from "./components/NumberState";
-import StringState from "./components/StringState";
-import BooleanState from "./components/BooleanState";
-import MultipleStates from "./components/MultipleStates";
-import SimpleVariables from "./SimpleVariables";
-import TernaryDemo from "./TernaryDemo";
-import ListRendering from "./ListRendering";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
-import UserCard from "./components/UserCard";
-import ClickEvents from "./ClickEvents";
-import InputEvents from "./InputEvents";
-import KeyboardEvents from "./KeyboardEvents";
-import FormEvents from "./FormEvents";
-import ListBasics from "./ListBasics";
-import CreateItem from "./CreateItem";
-import DeleteItem from "./DeleteItem";
-import UpdateItem from "./UpdateItem";
+import { useState } from "react";
+import TodoItem from "./components/TodoItem";
+import TodoFilter from "./components/TodoFilter";
 
 function App() {
-    const products = [
-        {
-            id: 1,
-            name: "iPhone 15",
-            price: "25.000.000",
-            image: "https://picsum.photos/250/150?1"
-        },
-        {
-            id: 2,
-            name: "Samsung S24",
-            price: "22.000.000",
-            image: "https://picsum.photos/250/150?2"
-        },
-        {
-            id: 3,
-            name: "Xiaomi 14",
-            price: "15.000.000",
-            image: "https://picsum.photos/250/150?3"
+    // State chính (Tier 4)
+    const [todos, setTodos] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [filter, setFilter] = useState("all");
+    
+    // ===== Thêm todo (Tier 6) =====
+    function addTodo() {
+        if (inputValue.trim() === "") return;
+        
+        const newTodo = {
+            id: Date.now(),
+            text: inputValue,
+            done: false
+        };
+        
+        setTodos([...todos, newTodo]);
+        setInputValue("");
+    }
+    
+    // Xử lý phím Enter (Tier 5)
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            addTodo();
         }
-    ];
-
-    const users = [
-        {
-            id: 1,
-            name: "Nguyễn Văn Minh",
-            email: "minh@gmail.com",
-            avatar: "https://i.pravatar.cc/100?img=1"
-        },
-        {
-            id: 2,
-            name: "Trần Văn An",
-            email: "an@gmail.com",
-            avatar: "https://i.pravatar.cc/100?img=2"
-        },
-        {
-            id: 3,
-            name: "Lê Thị Linh",
-            email: "linh@gmail.com",
-            avatar: "https://i.pravatar.cc/100?img=3"
-        }
-    ];
+    }
+    
+    // ===== Toggle done (Tier 6) =====
+    function toggleTodo(id) {
+        setTodos(todos.map(todo =>
+            todo.id === id ? { ...todo, done: !todo.done } : todo
+        ));
+    }
+    
+    // ===== Xóa todo (Tier 6) =====
+    function deleteTodo(id) {
+        setTodos(todos.filter(todo => todo.id !== id));
+    }
+    
+    // ===== Lọc todos (Tier 2) =====
+    const filteredTodos = todos.filter(todo => {
+        if (filter === "active") return !todo.done;
+        if (filter === "completed") return todo.done;
+        return true;
+    });
+    
+    // ===== Đếm số việc (Tier 2) =====
+    const activeCount = todos.filter(todo => !todo.done).length;
+    const completedCount = todos.filter(todo => todo.done).length;
+    
     return (
-        <div>
-            <h1>Tier 1 - React Flow</h1>
-
-            <LifecycleDemo />
-
-            <hr />
-
-            <BadCounter />
-
-            <hr />
-
-            <GoodCounter />
-
-            <hr />
-
-            <FlowDemo />
-
-            <h1>Tier 2 - JSX Variables</h1>
-
-            <SimpleVariables />
-
-            <hr />
-
-            <TernaryDemo />
-
-            <hr />
-
-            <ListRendering />
-
-            <Header />
-
-            <div style={{ padding: "20px" }}>
-                <h2>Danh sách sản phẩm</h2>
-
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "20px",
-                        flexWrap: "wrap"
+        <div style={{ 
+            maxWidth: "500px", 
+            margin: "0 auto", 
+            padding: "20px",
+            fontFamily: "Arial, sans-serif"
+        }}>
+            <h1 style={{ textAlign: "center" }}>📋 Todo List</h1>
+            
+            {/* Input (Tier 5) */}
+            <div style={{ display: "flex", marginBottom: "20px" }}>
+                <input 
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Nhập công việc..."
+                    style={{ 
+                        flex: 1, 
+                        padding: "10px", 
+                        fontSize: "16px",
+                        border: "2px solid #ddd",
+                        borderRadius: "4px 0 0 4px"
+                    }}
+                />
+                <button 
+                    onClick={addTodo}
+                    style={{ 
+                        padding: "10px 20px", 
+                        fontSize: "16px",
+                        background: "#3498db",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "0 4px 4px 0",
+                        cursor: "pointer"
                     }}
                 >
-                    {products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            name={product.name}
-                            price={product.price}
-                            image={product.image}
-                        />
-                    ))}
-                </div>
-
-                <hr />
-
-                <h2>Danh sách người dùng</h2>
-
-                {users.map((user) => (
-                    <UserCard
-                        key={user.id}
-                        name={user.name}
-                        email={user.email}
-                        avatar={user.avatar}
-                    />
-                ))}
+                    Thêm
+                </button>
             </div>
-
-            <Footer />
-
-            <h1>Tier 4 - useState Basics</h1>
-
-            <NumberState />
-
-            <hr />
-
-            <StringState />
-
-            <hr />
-
-            <BooleanState />
-
-            <hr />
-
-            <MultipleStates />
-            <h1>Tier 5 - Events</h1>
-
-            <ClickEvents />
-
-            <hr />
-
-            <InputEvents />
-
-            <hr />
-
-            <KeyboardEvents />
-
-            <hr />
-
-            <FormEvents />
-            <h1>
-                Tier 6 - Lists & CRUD
-            </h1>
-
-            <ListBasics />
-
-            <hr />
-
-            <CreateItem />
-
-            <hr />
-
-            <DeleteItem />
-
-            <hr />
-
-            <UpdateItem />
+            
+            {/* Filter (Tier 3) */}
+            <TodoFilter 
+                filter={filter}
+                setFilter={setFilter}
+            />
+            
+            {/* Todo list (Tier 6) */}
+            {filteredTodos.length === 0 ? (
+                <div style={{ 
+                    textAlign: "center", 
+                    padding: "40px",
+                    color: "#999"
+                }}>
+                    {todos.length === 0 
+                        ? "📝 Chưa có công việc nào" 
+                        : "Không có công việc phù hợp"}
+                </div>
+            ) : (
+                filteredTodos.map(todo => (
+                    <TodoItem 
+                        key={todo.id}
+                        todo={todo}
+                        onToggle={toggleTodo}
+                        onDelete={deleteTodo}
+                    />
+                ))
+            )}
+            
+            {/* Footer (Tier 2) */}
+            {todos.length > 0 && (
+                <div style={{ 
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "15px",
+                    padding: "10px",
+                    background: "#f9f9f9",
+                    borderRadius: "4px"
+                }}>
+                    <span>{activeCount} việc chưa hoàn thành</span>
+                    {completedCount > 0 && (
+                        <span style={{ color: "#666" }}>
+                            {completedCount} việc đã xong
+                        </span>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
