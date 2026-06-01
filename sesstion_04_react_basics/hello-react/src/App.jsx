@@ -2,7 +2,10 @@ import LifecycleDemo from "./LifecycleDemo";
 import BadCounter from "./BadCounter";
 import GoodCounter from "./GoodCounter";
 import FlowDemo from "./FlowDemo";
-
+import NumberState from "./components/NumberState";
+import StringState from "./components/StringState";
+import BooleanState from "./components/BooleanState";
+import MultipleStates from "./components/MultipleStates";
 import SimpleVariables from "./SimpleVariables";
 import TernaryDemo from "./TernaryDemo";
 import ListRendering from "./ListRendering";
@@ -10,6 +13,15 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductCard from "./components/ProductCard";
 import UserCard from "./components/UserCard";
+import ClickEvents from "./ClickEvents";
+import InputEvents from "./InputEvents";
+import KeyboardEvents from "./KeyboardEvents";
+import FormEvents from "./FormEvents";
+import ListBasics from "./ListBasics";
+import CreateItem from "./CreateItem";
+import DeleteItem from "./DeleteItem";
+import UpdateItem from "./UpdateItem";
+
 function App() {
     const products = [
         {
@@ -119,6 +131,54 @@ function App() {
             </div>
 
             <Footer />
+
+            <h1>Tier 4 - useState Basics</h1>
+
+            <NumberState />
+
+            <hr />
+
+            <StringState />
+
+            <hr />
+
+            <BooleanState />
+
+            <hr />
+
+            <MultipleStates />
+            <h1>Tier 5 - Events</h1>
+
+            <ClickEvents />
+
+            <hr />
+
+            <InputEvents />
+
+            <hr />
+
+            <KeyboardEvents />
+
+            <hr />
+
+            <FormEvents />
+            <h1>
+                Tier 6 - Lists & CRUD
+            </h1>
+
+            <ListBasics />
+
+            <hr />
+
+            <CreateItem />
+
+            <hr />
+
+            <DeleteItem />
+
+            <hr />
+
+            <UpdateItem />
         </div>
     );
 }
